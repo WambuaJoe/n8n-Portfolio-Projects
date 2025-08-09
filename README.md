@@ -4,11 +4,11 @@ This portfolio showcases automation workflow projects I have built using [n8n](h
 
 ## Projects
 ### File Structure
-- Automated RSS-to-Social Media Poster
+- [Social Media Poster](https://github.com/WambuaJoe/n8n-Portfolio-Projects/blob/main/project/Social%20Media%20Poster/sm-poster.html)
 - Google Sheets Data Logger
 - Lead Enrichment & CRM Entry
 - Content Summarization Bot
-- AI-Powered Knowledge Base Search
+- [AI-Powered Knowledge Base Search](https://github.com/WambuaJoe/n8n-Portfolio-Projects/blob/main/project/RAG%20Chatbot/RAG-workflow.html)
 - Multi-Platform Social Media Manager
 
 ```
