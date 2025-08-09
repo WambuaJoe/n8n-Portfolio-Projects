@@ -26,7 +26,7 @@ n8n-portfolio/
 ```
 
 ## Live Site
-View the portfolio here: **[GitHub Pages Link](https://yourusername.github.io/n8n-portfolio/)**
+View the portfolio here: **[GitHub Pages Link]([https://yourusername.github.io/n8n-portfolio/](https://wambuajoe.github.io/n8n-Portfolio-Projects/))**
 
 ## How to Use
 1. Visit the project page.
