@@ -1,2 +1,20 @@
-# n8n-Portfolio-Projects
-Showcasing n8n Automation Projects
+# n8n Automation Portfolio
+
+This portfolio showcases automation workflow projects I have built using [n8n](https://n8n.io).
+
+## Projects
+- Automated RSS-to-Social Media Poster
+- Google Sheets Data Logger
+- Lead Enrichment & CRM Entry
+- Content Summarization Bot
+- AI-Powered Knowledge Base Search
+- Multi-Platform Social Media Manager
+
+## Live Site
+View the portfolio here: **[GitHub Pages Link](https://yourusername.github.io/n8n-portfolio/)**
+
+## How to Use
+1. Visit the project page.
+2. Download the `.json` file for the workflow.
+3. Import it into your own n8n instance.
+4. Try the live demo links where available.
