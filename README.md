@@ -4,7 +4,7 @@ This portfolio showcases automation workflow projects I have built using [n8n](h
 
 ## Projects
 ### File Structure
-- [Social Media Poster]()
+- [Social Media Poster](https://github.com/WambuaJoe/n8n-Portfolio-Projects/blob/main/project/Social%20Media%20Poster/sm-poster.html)
 - [Google Sheets Data Logger]()
 - [Lead Enrichment & CRM Entry]()
 - [Content Summarization Bot]()
