@@ -8,22 +8,26 @@
 </head>
 <body>
   <header>
-    <h1>AI-Powered Knowledge Base Search</h1>
-    <p>Advanced workflow using n8n, Pinecone, and Google Gemini</p>
+    <h1>Social Media Cross-Posting Tool</h1>
+    <p>Pulls RSS feed items and posts them to social media platforms</p>
   </header>
 
   <main>
     <section class="project-detail">
       <img src="" alt="Workflow Screenshot">
       <h2>About This Workflow</h2>
-      <p>This automation ingests documents, stores them in Pinecone as vector embeddings, and allows natural language queries using Gemini's AI capabilities.</p>
+      <p>This automation 
+        <ul>
+          <li>pulls new content from RSS feeds</li>
+          <li> formats it</li>
+          <li>posts it directly to connected social media accounts for consistent content distribution</li>
 
       <h2>Tech Used</h2>
       <ul>
-        <li>n8n</li>
-        <li>Pinecone Vector DB</li>
-        <li>Google Gemini API</li>
-        <li>HTTP Request Node</li>
+          <li>n8n</li>
+          <li>RSS Feed Trigger Node</li>
+          <li>HTTP Request Node (for API posting)</li>
+          <li>OAuth2 Authentication (Twitter/X, LinkedIn, etc.)</li>
       </ul>
 
       <h2>Links</h2>
