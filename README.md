@@ -1,6 +1,6 @@
-# n8n Portfolio Projects
+# Portfolio Projects
 
-This repository showcases my collection of hands-on portfolio projects using **n8n**—a powerful no-code/low-code workflow automation tool. Each project demonstrates real-world integrations, automation techniques, and the visual logic of automation flows.
+This repository showcases my collection of hands-on portfolio projects using **n8n** - a powerful no-code/low-code workflow automation tool. Each project demonstrates real-world integrations, automation techniques, and the visual logic of automation flows.
 
 ----------
 
@@ -27,7 +27,7 @@ This repository showcases my collection of hands-on portfolio projects using **n
 	├── index.html        		# Main landing page
 	├── style.css         		# Styling
 	├── projects/
-	│   ├── project1/
+	│   ├── project1/           # individual project directory
 	│   │	├── project1.html 	# Individual project page
 	│   ├── project2/
 	│   │	├── project2.html
