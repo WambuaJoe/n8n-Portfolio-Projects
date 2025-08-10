@@ -2,6 +2,8 @@
 
 This repository showcases my collection of hands-on portfolio projects using **n8n** - a powerful no-code/low-code workflow automation tool. Each project demonstrates real-world integrations, automation techniques, and the visual logic of automation flows.
 
+Portfolio [link](https://wambuajoe.github.io/n8n-Portfolio-Projects/)
+
 ----------
 
 ## Overview
