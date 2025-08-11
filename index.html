@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Joseph Wambua</title>
+
+<!-- Font Awesome (icons) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  :root{
+    --accent:#ff7f50;
+    --accent-dark:#e0673d;
+    --muted:#cfcfcf;
+  }
+
+  /* Reset */
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html,body{height:100%}
+  body{
+    min-height:100%;
+    font-family: "Helvetica Neue", Inter, Arial, sans-serif;
+    color: #fff;
+    background:
+      linear-gradient(180deg, rgba(5,12,17,0.85) 0%, rgba(26,21,18,0.65) 40%, rgba(0,0,0,0.85) 100%),
+      url('background.jpg') center/cover no-repeat fixed;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  /* Page wrapper keeps content roughly centered with left bias */
+  .wrap {
+    width: min(1200px, 92%);
+    display:flex;
+    align-items:center;
+    gap: 48px;
+    margin-top: 6vh;
+  }
+
+  /* Left column: text */
+  .profile-left{
+    flex:1;
+    max-width:720px;
+  }
+
+  h1{
+    font-size: clamp(28px, 5.6vw, 64px); /* large on desktop */
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    font-weight: 800;
+    text-transform:uppercase;
+    color:#fff;
+    text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  }
+
+  h2{
+    margin-bottom: 18px;
+    font-weight: 400;
+    font-size: clamp(16px, 2.1vw, 28px);
+    color: #e6e6e6;
+  }
+
+  /* Icon row */
+  .icons{
+    display:flex;
+    gap:14px;
+    margin: 16px 0 20px;
+  }
+  .icons a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    text-decoration:none;
+    transition: transform .18s ease, background .18s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    font-size:18px;
+  }
+  .icons a:hover{
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.16);
+  }
+
+  /* Bio paragraph */
+  .bio{
+    color: var(--muted);
+    font-size: clamp(14px, 1.6vw, 18px);
+    line-height:1.7;
+    margin-top: 6px;
+    max-width: 640px;
+  }
+
+  /* Right column: profile picture */
+  .profile-right{
+    width:230px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+  }
+  .avatar{
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    overflow:hidden;
+    border: 6px solid rgba(255,255,255,0.12);
+    box-shadow: 0 18px 60px rgba(0,0,0,0.6), 0 6px 18px rgba(0,0,0,0.5);
+  }
+  .avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  /* View Projects button at bottom center (not fixed) */
+  .cta-wrap{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+  }
+  .btn {
+    display:inline-block;
+    background: var(--accent);
+    color:#fff;
+    padding: 14px 28px;
+    border-radius: 28px;
+    text-decoration:none;
+    font-weight:700;
+    box-shadow: 0 8px 30px rgba(255,127,80,0.18);
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .btn:hover{ transform: translateY(-4px); background: var(--accent-dark); box-shadow: 0 14px 40px rgba(224,103,61,0.18); }
+
+  footer{
+    width:100%;
+    text-align:center;
+    padding: 18px 12px;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    margin-top:auto;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.16));
+  }
+
+  /* Responsive: stack on smaller screens, center everything */
+  @media (max-width: 880px){
+    .wrap{ flex-direction:column-reverse; align-items:center; gap:18px; margin-top: 8vh; }
+    .profile-right{ width:160px; }
+    .avatar{ width:160px; height:160px; border-width:4px; }
+    .bio{ text-align:center; padding:0 8px;}
+    .profile-left{ text-align:center; }
+    .icons{ justify-content:center; }
+  }
+
+  @media (max-width: 420px){
+    body{ background-position: center 20%; }
+    h1{ font-size: 28px; }
+    h2{ font-size: 16px; }
+    .bio{ font-size:15px; }
+    .avatar{ width:136px; height:136px; }
+    .profile-right{ width:136px; }
+  }
+</style>
+</head>
+<body>
+
+  <main class="wrap" role="main" aria-labelledby="name">
+    <!-- LEFT: text (name, title, icons, bio) -->
+    <section class="profile-left" aria-label="Profile information">
+      <h1 id="name">JOSEPH WAMBUA</h1>
+      <h2>Automation Specialist</h2>
+
+      <nav class="icons" aria-label="Contact links">
+        <!-- Discord -->
+        <a href="https://discord.com/users/YOUR_DISCORD_ID" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+          <i class="fab fa-discord"></i>
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:youremail@example.com" aria-label="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+
+        <!-- Telegram -->
+        <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+
+        <!-- Link to resume/website (optional) -->
+        <a href="https://your-website.example" target="_blank" rel="noopener noreferrer" aria-label="Personal site">
+          <i class="fas fa-link"></i>
+        </a>
+      </nav>
+
+      <p class="bio">
+        An architect of order — whether automating invoice processes with Airtable, designing
+        foolproof workflows in n8n, or turning client feedback into actionable data, I thrive
+        where logic meets creativity.
+      </p>
+    </section>
+
+    <!-- RIGHT: profile image -->
+    <aside class="profile-right" aria-hidden="false">
+      <div class="avatar" role="img" aria-label="Profile photo">
+        <img src="profile.jpg" alt="Profile photo">
+      </div>
+    </aside>
+  </main>
+
+  <div class="cta-wrap">
+    <a class="btn" href="projects.html" title="View Projects">View My Projects</a>
+  </div>
+
+  <footer>
+    &copy; <span id="year"></span> Joseph Wambua — Automation & Workflow Specialist
+  </footer>
+
+<script>
+  // small script to set current year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
