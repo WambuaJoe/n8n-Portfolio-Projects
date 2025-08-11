@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Sheets Data Logger</title>
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sheets Data Logger</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <header>
-    <h1>Google Sheets Data Logger</h1>
-    <p>Logs form submissions into Google Sheets in real time.</p>
-  </header>
+    <header class="header">
+        <div class="logo">My Portfolio</div>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../homepage/project-page.html">Projects</a>
+        </nav>
+    </header>
 
-  <main>
-    <a href="../../homepage/index.html" class="back-button">← Back to Home</a>
-    <section class="project-detail">
-      <img src="" alt="Workflow Screenshot">
-      <h2>About This Workflow</h2>
-      <p>This workflow automatically collects and logs structured data into Google Sheets from multiple sources. It can capture form submissions, API responses, or even scraped data from websites. The system runs on a scheduled basis or in real-time, ensuring that the Google Sheet is always up to date. Built-in validation ensures only clean, properly formatted data is stored. Users can also trigger notifications when new entries are added, making it ideal for sales teams, researchers, and data analysts. Over time, it becomes a central hub for live reporting and analytics.</p>
-      <h2>Tech Used</h2>
-      <ul>
-          <li>n8n</li>
-          <li>Google Sheets node</li>
-          <li>Webhook Trigger Node</li>
-          <li>Email/Slack Alerts</li>
-          <li>Data Transformation Functions</li>
-      </ul>
+    <main class="project-container">
+        <div class="project-card glass">
+            <h1>Google Sheets Data Logger</h1>
+            <p class="subtitle">Logs data from various sources into Google Sheets.</p>
 
-      <h2>Links</h2>
-      <a href="../assets/workflows/project5.json" class="btn">Download Workflow JSON</a>
-      <a href="https://n8n.yourdomain.com/webhook/knowledge-search" target="_blank" class="btn">Live Demo</a>
-    </section>
-  </main>
+            <img src="project-image.jpg" alt="Project Image" class="project-image">
 
-  <footer style="text-align: center; margin-top: 20px;">
-    <p>© 2025 Wambua Katua</p>
-  </footer>
+            <section class="project-details">
+                <h2>About This Project</h2>
+                <p>
+                  This workflow automatically collects and logs structured data into Google Sheets from multiple sources. It can capture form submissions, API responses, or even scraped data from websites. The system runs on a scheduled basis or in real-time, ensuring that the Google Sheet is always up to date. Built-in validation ensures only clean, properly formatted data is stored. Users can also trigger notifications when new entries are added, making it ideal for sales teams, researchers, and data analysts. Over time, it becomes a central hub for live reporting and analytics.
+                </p>
+            </section>
+
+            <section class="tech-stack">
+                <h2>Tech Stack</h2>
+                <ul>
+                    <li>n8n</li>
+                    <li>Google Sheets</li>
+                    <li>Webhook Trigger</li>
+                    <li>Email/Slack Alerts</li>
+                    <li>Data Transformation Functions</li>
+                </ul>
+            </section>
+
+            <a href="#" class="btn">Download workflow JSON</a>
+            <a href="#" class="btn">View Live Project</a>
+        </div>
+    </main>
 </body>
 </html>
