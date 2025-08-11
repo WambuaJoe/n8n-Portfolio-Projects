@@ -130,6 +130,6 @@ h1 {
 @media (max-width: 600px) {
     .button-group .btn {
         width: 100%;
-        margin-bottom: 1rem;
+        gap: 1rem;
     }
 }
