@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Telegram RAG Chatbot</title>
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered RAG Telegram Chatbot</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <header>
-    <h1>AI-Powered Knowledge Base Search</h1>
-    <p>Advanced workflow using n8n, Pinecone, and Google Gemini</p>
-  </header>
+    <header class="header">
+        <div class="logo">My Portfolio</div>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../homepage/project-page.html">Projects</a>
+        </nav>
+    </header>
 
-  <main>
-    <a href="../../homepage/index.html" class="back-button">← Back to Home</a>
-    <section class="project-detail">
-      <img src="../../design/assets/images/Telegram Chatbot.png" alt="Workflow Screenshot">
-      <h2>About This Workflow</h2>
-      <p>This chatbot uses Retrieval-Augmented Generation (RAG) to answer user questions with accurate, context-specific responses. Instead of relying only on AI's memory, it retrieves relevant documents from a vector database, then feeds them into an AI model for response generation. Users interact through Telegram, making it accessible and easy to use. It’s ideal for internal knowledge bases, customer support, or educational resources. The bot can handle large datasets, update its knowledge base automatically, and ensure answers remain accurate over time.</p>
-      <h2>Tech Used</h2>
-      <ul>
-        <li>n8n</li>
-        <li>Pinecone Vector Database</li>
-        <li>OpenAI API</li>
-        <li>Telegram Bot API</li>
-      </ul>
+    <main class="project-container">
+        <div class="project-card glass">
+            <h1>AI-Powered RAG Telegram Chatbot</h1>
+            <p class="subtitle">Chat with your documents and get instant, smart answers in Telegram.</p>
+            
+            <img src="../../design/assets/images/Telegram Chatbot.png" alt="Project Image" class="project-image">
 
-      <h2>Links</h2>
-      <a href="../assets/workflows/project5.json" class="btn">Download Workflow JSON</a>
-      <a href="https://n8n.yourdomain.com/webhook/knowledge-search" target="_blank" class="btn">Live Demo</a>
-    </section>
-  </main>
+            <section class="project-details">
+                <h2>About This Project</h2>
+                <p>
+                    This chatbot uses Retrieval-Augmented Generation (RAG) to answer user questions with accurate, context-specific responses. Instead of relying only on AI's memory, it retrieves relevant documents from a vector database, then feeds them into an AI model for response generation. Users interact through Telegram, making it accessible and easy to use. It’s ideal for internal knowledge bases, customer support, or educational resources. The bot can handle large datasets, update its knowledge base automatically, and ensure answers remain accurate over time.
+                </p>
+            </section>
 
-  <footer style="text-align: center; margin-top: 20px;">
-    <p>© 2025 Wambua Katua</p>
-  </footer>
+            <section class="tech-stack">
+                <h2>Tech Stack</h2>
+                <ul>
+                    <li>n8n</li>
+                    <li>Pinecone Vector Database</li>
+                    <li>OpenAI API (GPT-4o/4.1-mini)</li>
+                    <li>Telegram Bot API</li>
+                </ul>
+            </section>
+
+            <a href="#" class="btn">Download workflow JSON</a>
+            <a href="#" class="btn">View Live Project</a>
+        </div>
+    </main>
 </body>
 </html>
