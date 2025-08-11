@@ -112,3 +112,123 @@ footer {
 .back-button:hover {
     background-color: #005fa3;
 }
+/* Base Styles */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+    color: #fff;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.header .logo {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #fff;
+}
+
+.header nav a {
+    color: #ccc;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.header nav a:hover {
+    color: #fff;
+}
+
+/* Project Page Layout */
+.project-container {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1rem;
+}
+
+.project-card {
+    max-width: 800px;
+    width: 100%;
+    padding: 2rem;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card.glass {
+    background: rgba(30, 30, 30, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+/* Project Content */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #aaa;
+    margin-bottom: 2rem;
+}
+
+.project-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease;
+}
+
+.project-image:hover {
+    transform: scale(1.02);
+}
+
+.project-details, .tech-stack {
+    margin-bottom: 2rem;
+}
+
+.tech-stack ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-stack li {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    list-style-position: inside;
+}
+
+/* Button */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #ff5f6d, #ffc371);
+    border-radius: 8px;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255,95,109,0.4);
+}

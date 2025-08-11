@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Social Media Poster</title>
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Cross-Posting Tool</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <header>
-    <h1>Social Media Cross-Posting Tool</h1>
-    <p>Pulls RSS feed items and posts them to social media platforms</p>
-  </header>
+    <header class="header">
+        <div class="logo">My Portfolio</div>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../homepage/project-page.html">Projects</a>
+        </nav>
+    </header>
 
-  <main>
-    <a href="../../homepage/index.html" class="back-button">← Back to Home</a>
-    <section class="project-detail">
-      <img src="" alt="Workflow Screenshot">
-      <h2>About This Workflow</h2>
-      <p>This project automates the process of creating and publishing social media posts across multiple platforms. It fetches content ideas from RSS feeds, AI prompts, or uploaded files, then formats them according to each platform’s style guide. Images and captions are automatically generated or enhanced using AI. Posts are scheduled at optimal times for maximum engagement. This workflow eliminates repetitive manual posting, freeing up time for strategic content planning. It’s scalable and can be adapted for individuals, agencies, or large brands.</p>
+    <main class="project-container">
+        <div class="project-card glass">
+            <h1>Social Media Cross-Posting Tool</h1>
+            <p class="subtitle">Turn any RSS feed into ready-to-post social updates—automatically.</p>
+            
+            <img src="project-image.jpg" alt="Project Image" class="project-image">
 
-      <h2>Tech Used</h2>
-      <ul>
-          <li>n8n</li>
-          <li>RSS Feed Trigger Node</li>
-          <li>HTTP Request Node (for API posting)</li>
-          <li>OAuth2 Authentication (Twitter/X, LinkedIn, etc.)</li>
-      </ul>
+            <section class="project-details">
+                <h2>About This Project</h2>
+                <p>
+                    This project automates the process of creating and publishing social media posts across multiple platforms. It fetches content ideas from RSS feeds or AI prompts then formats them according to each platform’s style guide. Images and captions are automatically generated or enhanced using AI. Posts are scheduled at optimal times for maximum engagement. This workflow eliminates repetitive manual posting, freeing up time for strategic content planning. It’s scalable and can be adapted for individuals, agencies, or large brands.
+                </p>
+            </section>
 
-      <h2>Links</h2>
-      <a href="../assets/workflows/project5.json" class="btn">Download Workflow JSON</a>
-      <a href="https://n8n.yourdomain.com/webhook/knowledge-search" target="_blank" class="btn">Live Demo</a>
-    </section>
-  </main>
+            <section class="tech-stack">
+                <h2>Tech Stack</h2>
+                <ul>
+                    <li>n8n</li>
+                    <li>RSS Feed</li>
+                    <li>HTTP Request Node (for API posting)</li>
+                    <li>OAuth2 Authentication (Twitter/X, LinkedIn, etc.)</li>
+                </ul>
+            </section>
 
-  <footer style="text-align: center; margin-top: 20px;">
-    <p>© 2025 Wambua Katua</p>
-  </footer>
+            <a href="#" class="btn">Download workflow JSON</a>
+            <a href="#" class="btn">View Live Project</a>
+        </div>
+    </main>
 </body>
 </html>
