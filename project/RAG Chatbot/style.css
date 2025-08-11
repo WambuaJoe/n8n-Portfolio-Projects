@@ -126,3 +126,10 @@ h1 {
     flex-wrap: wrap; /* allows wrapping on small screens */
     margin-top: 2rem;
 }
+
+@media (max-width: 600px) {
+    .button-group .btn {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}
