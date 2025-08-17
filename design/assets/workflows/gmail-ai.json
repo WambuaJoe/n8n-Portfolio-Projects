@@ -1,0 +1,561 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {},
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -224,
+        176
+      ],
+      "id": "9a0e55cc-89a4-4cdd-9555-108c15cdcab5",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zAemON35cXITMeK3",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        688
+      ],
+      "id": "8758df63-198d-4480-af00-12a5ed842247",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "YPy4QjTE6oQcP8wC",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"label\": \"Finance\",\n  \"summary\": \"The sender is following up about a pending invoice and asking when it will be paid. They offered to resend it if needed.\",\n  \"response\": \"Hi there! Thanks for reaching out. Your invoice has been received and is currently being processed - payment should be issued by the end of the week. Let me know if you need anything else. Cheers!\",\n  \"email\": \"test@mail.com\",\n  \"name\": \"AN Other\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        192,
+        400
+      ],
+      "id": "0760401a-fabb-44b0-a6c4-c46d3d9b2bd1",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "resource": "label"
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        432,
+        544
+      ],
+      "id": "4f9b3492-390b-498c-9419-c28e4310736e",
+      "name": "Get labels",
+      "webhookId": "bde2820d-a44f-4460-922a-cc3a13ab98a3",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zAemON35cXITMeK3",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "labelIds": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Label_Names_or_IDs', `based on the label input, choose which label to add  (it should be a label with type: user)`, 'string') }}"
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        560,
+        544
+      ],
+      "id": "bc1c685a-fe75-4e6e-ab5d-172fa69bf3f7",
+      "name": "Add label",
+      "webhookId": "fab3bf98-37d4-44be-a91f-fdf9234ca979",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zAemON35cXITMeK3",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Label: {{ $json.output.label }}",
+        "options": {
+          "systemMessage": "Based on the label input, add the label to the email using the tool "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.1,
+      "position": [
+        400,
+        320
+      ],
+      "id": "90c2b76f-457a-45c6-88a5-10893cad90d8",
+      "name": "Add Label to Email"
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ $('Gmail Trigger').item.json.subject }}",
+        "message": "={{ $json.output.response }}",
+        "options": {
+          "threadId": "={{ $('Gmail Trigger').item.json.threadId }}",
+          "sendTo": "={{ $json.output.email }}"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        496,
+        32
+      ],
+      "id": "901e7044-3599-4a25-a66b-74a076e4e5a6",
+      "name": "Create a draft",
+      "webhookId": "c1cb7c18-4857-428c-8e38-c4849560035b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zAemON35cXITMeK3",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Subject: {{ $json.subject }}\n\nBody: {{ $json.text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You're an email assistant agent. Your job is to read the **Subject** and **Body** of an email, then do the following:\n\n1. Summarize the email in 2-3 clear, brief, and concise sentences.\n2. Assign a single label based on the email's topic. Use one of these categories\n    [\"Support\", \"Personal\", \"Scheduling\", \"Finance\", \"Spam\", \"Other\"]\n3. Draft a professional and helpful response, written in a friendly and human tone.\n4. Sign off as The Anjin - n8n\n\nRespond **ONLY** with a valid JSON object using this format\n\n{\n  \"label\": \"...\",\n  \"summary\": \"...\",\n  \"response\": \"...\",\n  \"email\": \"...\",\n  \"name\": \"...\"\n}\n\n\nI want you to get the email from the address: <email> and add it to the json value as shown above\n\nGet the name from {{ $json.text }} in the from: < FirstName SecondName >"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        176
+      ],
+      "id": "352aff6e-08c0-4900-84fb-6c3bbe78c974",
+      "name": "Label, Summarize & Respond"
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C09AZHUBY72",
+          "mode": "list",
+          "cachedResultName": "call-to-action"
+        },
+        "text": "===================\nNew email received\n==================\nFrom: {{ $('Label, Summarize & Respond').item.json.output.name }}\nLabel: {{ $('Label, Summarize & Respond').item.json.output.label }}\n\n==============\nDraft Response\n==============\n{{ $('Label, Summarize & Respond').item.json.output.response }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        800,
+        32
+      ],
+      "id": "0be1d3e8-4fb4-444c-82c7-259756f8c453",
+      "name": "Send a message",
+      "webhookId": "93afce9c-e1d4-4593-a932-9c13900b7868",
+      "credentials": {
+        "slackApi": {
+          "id": "Fu80XbtP3ekupHOJ",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "schedule_appointment",
+        "formTitle": "Schedule an Appointment",
+        "formDescription": "=Welcome to Wambua's Appointment Form.\nBefore we set a date, please tell me a little about yourself and how I can help.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Your Name",
+              "placeholder": "eg. Tom'N Jerry",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "placeholder": "eg. tomnjerry@example.com",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Enquiry",
+              "fieldType": "textarea",
+              "placeholder": "eg. I'm looking for...",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "ignoreBots": true,
+          "useWorkflowTimezone": true
+        }
+      },
+      "id": "ba2238c1-b7fe-4c9c-b45e-9bf1f8803110",
+      "name": "n8n Form Trigger",
+      "type": "n8n-nodes-base.formTrigger",
+      "position": [
+        -224,
+        -288
+      ],
+      "webhookId": "5e7637dd-d222-4786-8cdc-7b66cebc1481",
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "defineForm": "json",
+        "jsonOutput": "={{\n[\n {\n \"fieldLabel\":\"Date\",\n \"requiredField\":true,\n \"fieldType\": \"dropdown\",\n \"fieldOptions\":\n Array(5).fill(0)\n .map((_,idx) => $now.plus(idx+1, 'day'))\n .filter(d => !d.isWeekend)\n .map(d => ({ option: d.format('EEE, d MMM') }))\n },\n {\n \"fieldLabel\": \"Time\",\n \"requiredField\": true,\n \"fieldType\": \"dropdown\",\n \"fieldOptions\": [\n { \"option\": \"9:00 am\" },\n { \"option\": \"10:00 am\" },\n { \"option\": \"11:00 am\" },\n { \"option\": \"12:00 pm\" },\n { \"option\": \"1:00 pm\" },\n { \"option\": \"2:00 pm\" },\n { \"option\": \"3:00 pm\" },\n { \"option\": \"4:00 pm\" },\n { \"option\": \"5:00 pm\" },\n { \"option\": \"6:00 pm\" }\n ]\n }\n]\n}}",
+        "options": {
+          "formTitle": "Enter a Date & Time",
+          "formDescription": "=Please select a date and time"
+        }
+      },
+      "id": "1bef32f7-bcc0-4826-b868-a2c8f9f5f4c5",
+      "name": "Enter Date & Time",
+      "type": "n8n-nodes-base.form",
+      "position": [
+        400,
+        -384
+      ],
+      "webhookId": "0cd03415-66f8-4c82-8069-5bfd8ea310bd",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n{\n name: $('n8n Form Trigger').first().json['Your Name'],\n email: $('n8n Form Trigger').first().json.Email,\n enquiry: $('n8n Form Trigger').first().json.Enquiry,\n dateTime: DateTime.fromFormat(`${$json.Date} ${$json.Time}`, \"EEE, dd MMM t\"),\n submittedAt: $('n8n Form Trigger').first().json.submittedAt,\n}\n}}",
+        "options": {}
+      },
+      "id": "3d30cb0b-03c7-4456-a19a-fff32cf9c420",
+      "name": "Get Form Values",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        624,
+        -480
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "Send me a DM Instead!",
+        "completionMessage": "Thanks for your enquiry but it may not necessarily need an appointment. Please feel free to email me instead at jim@example.com.",
+        "options": {}
+      },
+      "id": "cc31b501-0553-4730-a20c-7e1ccfb7bfb4",
+      "name": "Decline",
+      "type": "n8n-nodes-base.form",
+      "position": [
+        400,
+        -192
+      ],
+      "webhookId": "4353eadb-b7a0-45f2-8dd8-5f6cd882d8d8",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.Enquiry }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "relevant enquiry",
+              "description": "Enquire about AI, automation, digital products and product engineering."
+            }
+          ]
+        },
+        "options": {
+          "fallback": "other"
+        }
+      },
+      "id": "ed39d17e-98aa-457e-abf0-6159d076a4e9",
+      "name": "Enquiry Classifier",
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "position": [
+        0,
+        -384
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "model": "gpt-4.1-mini",
+        "options": {}
+      },
+      "id": "125407b7-ac96-4587-9251-003d09ee9fe0",
+      "name": "OpenAI Chat Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        96,
+        -160
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "openAiApi": {
+          "id": "YPy4QjTE6oQcP8wC",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "jonjose2048@gmail.com",
+        "subject": "=Inquiry Request",
+        "emailType": "text",
+        "message": "=New Inquiry received\n====================\nFrom: {{ $json.name }}\nDetails: {{ $json.enquiry }}\n\nAddress: {{ $json.email }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        848,
+        -384
+      ],
+      "id": "1ed3c593-85d3-4ffc-aacc-8e29036e7c32",
+      "name": "Send a message2",
+      "webhookId": "92d71216-0389-4776-b383-ce81b445349c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zAemON35cXITMeK3",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Get Form Values').first().json.email }}",
+        "subject": "=Appointment Request Received for {{ DateTime.fromISO($('Get Form Values').first().json.dateTime).format('EEE, dd MMM @ t') }}",
+        "message": "=<p>Dear {{ $('Get Form Values').first().json.name }},</p>\n<p>Thanks for requesting an appointment. We will review and get back to you shortly.</p>\n<p>Here is the summary of the request that was sent:</p>\n<p>\nName: {{ $('Get Form Values').first().json.name }}<br/>\nEmail: {{ $('Get Form Values').first().json.email }}<br/>\nEnquiry: {{ $('Get Form Values').first().json.enquiry }}<br/>\nSubmitted at: {{ $('Get Form Values').first().json.submittedAt }}\n</p>\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "2250d9c9-1651-426f-876f-b1422bb09e8e",
+      "name": "Send Receipt",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        848,
+        -576
+      ],
+      "webhookId": "5f590407-4ab9-4ae6-bb85-38dbe41d6dce",
+      "typeVersion": 2.1,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zAemON35cXITMeK3",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Label, Summarize & Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Label, Summarize & Respond",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Add Label to Email",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Label, Summarize & Respond",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get labels": {
+      "ai_tool": [
+        [
+          {
+            "node": "Add Label to Email",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add label": {
+      "ai_tool": [
+        [
+          {
+            "node": "Add Label to Email",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a draft": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Label, Summarize & Respond": {
+      "main": [
+        [
+          {
+            "node": "Add Label to Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create a draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "n8n Form Trigger": {
+      "main": [
+        [
+          {
+            "node": "Enquiry Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enter Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Get Form Values",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Form Values": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Receipt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enquiry Classifier": {
+      "main": [
+        [
+          {
+            "node": "Enter Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Decline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Enquiry Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Receipt": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "79ce73b1f8991442affe33db811b4c263acdc6589375a4d2e1d9d97ce87d3463"
+  }
+}
