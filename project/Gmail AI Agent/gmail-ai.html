@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Summarization Bot</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">My Portfolio</div>
+        <nav>
+            <a href="../../index.html">Home</a>
+            <a href="../../homepage/project-page.html">Projects</a>
+        </nav>
+    </header>
+
+    <main class="project-container">
+        <div class="project-card glass">
+            <h1>Gmail AI Agent</h1>
+            <p class="subtitle">“From inbox to Slack, minus the noise.”</p>
+            <img src="../../design/assets/images/Gmail AI.png" alt="Project Image" class="project-image">
+
+            <section class="project-details">
+                <h2>About This Project</h2>
+                <p>
+                    <p>This project combines two connected workflows to streamline how incoming enquiries and emails are handled.</p>
+The first workflow captures form submissions, classifies them with AI, and directs them into the right path - either scheduling follow-ups or gracefully declining irrelevant entries. The second workflow then listens to Gmail for incoming enquiries, automatically labels and summarizes the content, and prepares a draft response. Instead of sending replies directly, the draft is pushed to Slack, where a human teammate can quickly review, edit if needed, and approve before the message goes out.
+<p>Together, these workflows reduce manual sorting, ensure every enquiry gets acknowledged, and give teams a faster way to collaborate on responses without sacrificing quality or human oversight.</p>
+                </p>
+            </section>
+
+            <section class="tech-stack">
+                <h2>Tech Stack</h2>
+                <ul>
+                    <li>n8n</li>
+                    <li>OpenAI Chat Model (classification, summarization, and draft generation)</li>
+                    <li>Gmail (both trigger and output for managing emails, drafts, and labels)</li>
+                    <li>Slack (human-in-the-loop review stage)</li>
+                    <li>Structured Output Parser (Ensures AI responses stay consistent and formatted)</li>
+                </ul>
+            </section>
+
+            <div class="button-group">
+                <a href="https://github.com/WambuaJoe/n8n-Portfolio-Projects/blob/main/design/assets/workflows/gmail-ai.json" class="btn">Download workflow JSON</a>
+                <a href="https://7aaff1c33d95.ngrok-free.app/workflow/55RU1nnbRA8xvyhm" class="btn">View Live Project</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
