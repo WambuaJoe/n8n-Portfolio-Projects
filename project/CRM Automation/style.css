@@ -106,19 +106,20 @@ h1 {
 /* Button */
 .btn {
     display: inline-block;
-    padding: 0.8rem 1.5rem;
-    background: linear-gradient(135deg, #ff5f6d, #ffc371);
-    border-radius: 8px;
-    color: #000;
+    padding: 14px 34px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-family: "Poppins", sans-serif;
+    color: #fff;
     text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255,95,109,0.4);
-}
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    transition: all .25s ease;
+  }
+  .btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  }
 
 .button-group {
     display: flex;
